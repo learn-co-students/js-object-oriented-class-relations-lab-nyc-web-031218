@@ -46,7 +46,7 @@ class Passenger {
 
   trips(){
     return store.trips.filter( (trip) => {
-      trip.id === tripId
+      trip.id === this.tripId
       return ["tripId"]
     })
   }
@@ -61,28 +61,32 @@ class Passenger {
 class Trip{
   constructor(driver, passenger){
   this.id = ++tripId
-  this.passengerId = passengerId
-  this.driverId = driverId
 
+  this.setDriver(driver)
+  this.setPassenger(passenger)
   store.trips.push(this)
   }
 
   setPassenger(passenger){
-     passengerId = passenger.id
+     this.passengerId = passenger.id
    }
+
   setDriver(driver){
-     driverId = driver.id
+     this.driverId = driver.id
    }
 
    passenger(){
+
       return store.passengers.find( passenger => {
-        return passenger.id === passengerId
+        console.log(this)
+        return passenger.id === this.passengerId
+
       })
     }
 
    driver(){
       return store.drivers.find( driver => {
-        return driver.id === driverId
+        return driver.id === this.driverId
       })
     }
 }
